@@ -14,7 +14,7 @@ SET time_zone = "-03:00";
 CREATE TABLE `collectors` (
     `registration` INT(99) NOT NULL PRIMARY KEY AUTO_INCREMENT,
     `fullName` VARCHAR(60) NOT NULL,
-    `birthDay` DATETIME NOT NULL,
+    `birthDay` DATE NOT NULL,
     `phone` VARCHAR(11) NOT NULL,
     `email` VARCHAR(30) NOT NULL UNIQUE,
     `cpf` VARCHAR(11) NOT NULL UNIQUE
