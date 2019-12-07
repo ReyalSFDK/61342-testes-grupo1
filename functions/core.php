@@ -188,7 +188,64 @@ function createCollector() {
                 setAlert(ALERT_SUCCESS, "O Colecionador foi adicionado com sucesso.");
                 header('Location: index.php');
             } else {
-                var_dump(mysqli_error($conn));
+                if (strpos(mysqli_error($conn), 'email') ) {
+                    setAlert(ALERT_ERROR, 'Este email já esta em uso');
+                }
+
+                if (strpos(mysqli_error($conn), 'cpf') ) {
+                    setAlert(ALERT_ERROR, 'Este cpf já esta em uso');
+                }
+            }
+        }
+    }
+}
+/**
+ * Adiciona um colecionador
+ *
+ * @throws Exception
+ */
+function editCollector(string $registration) {
+    global $conn;
+
+    if (!empty($_POST['token'])) {
+        $fullName = $_POST['fullName'] ?? '';
+        $birthDay = $_POST['birthDay'] ?? '';
+        $phone = $_POST['phone'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $cpf = $_POST['cpf'] ?? '';
+
+        $birthDate = DateTime::createFromFormat('Y-m-d', $birthDay);
+        if ($birthDate && validateCollector(
+            $fullName,
+            $birthDate,
+            $phone,
+            $email,
+            $cpf
+        )) {
+            $formattedBirthDate = $birthDate->format('Y-m-d');
+            $sql = "UPDATE
+                collectors
+                    SET
+                    fullName = '$fullName',
+                    birthDay = '$formattedBirthDate',
+                    phone = '$phone',
+                    email = '$email',
+                    cpf = '$cpf'
+                WHERE
+                   registration = $registration";
+
+            $query = mysqli_query($conn, $sql);
+            if ($query) {
+                setAlert(ALERT_SUCCESS, "O Colecionador foi editado com sucesso.");
+                header('Location: index.php');
+            } else {
+                if (strpos(mysqli_error($conn), 'email') ) {
+                    setAlert(ALERT_ERROR, 'Este email já esta em uso');
+                }
+
+                if (strpos(mysqli_error($conn), 'cpf') ) {
+                    setAlert(ALERT_ERROR, 'Este cpf já esta em uso');
+                }
             }
         }
     }
