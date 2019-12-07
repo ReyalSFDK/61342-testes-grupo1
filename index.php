@@ -17,7 +17,7 @@ $collectors = selectAllCollectors();
                 <h4 class="card-title">Trato Feito</h4>
             </div>
             <div class="col">
-                <button type="button" class="btn btn-dark">Adicionar</button>
+                <a type="button" class="btn btn-dark" href="cadastro.php">Adicionar</a>
             </div>
         </div>
         <table class="table table-striped table-dark margin-nav">
