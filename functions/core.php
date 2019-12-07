@@ -68,7 +68,7 @@ function setHeader(string $title) {
 function setNavBar() {
     echo '
         <nav class="navbar navbar-dark bg-dark nav center color">
-            <img class="img" src="https://imagens.viajonarios.com.br/2015/08/1425952800170.jpeg" alt="Logo Colecionadores">
+            <img class="img" src="https://upload.wikimedia.org/wikipedia/commons/d/d9/Pawn_Stars_logo-large.png" alt="Logo Colecionadores">
         </nav>
     ';
 }
