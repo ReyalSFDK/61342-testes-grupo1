@@ -92,13 +92,33 @@ function setJavaScripts() {
  *
  * @return array|bool|mysqli_result
  */
-function getAllCollectors() {
+function selectAllCollectors() {
     global $conn;
 
     $sql = "SELECT * FROM collectors ORDER BY registration";
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
-    return mysqli_fetch_assoc($result);
+    return mysqli_fetch_array($result);
+}
+
+/**
+ * @param string $registration
+ *
+ * @return object |null
+ */
+function selectCollector(string $registration) {
+    global $conn;
+
+    $sql = "SELECT * FROM collectors WHERE registration = $registration";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result) {
+        return mysqli_fetch_object($result);
+    } else {
+        setAlert(ALERT_ERROR, "Colecionador não encontrado.");
+        header('Location: index.php');
+    }
+
 }
 
 /**
