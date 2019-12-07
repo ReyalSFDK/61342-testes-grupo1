@@ -27,7 +27,7 @@ $collectors = selectAllCollectors();
                     <th scope="col">Matrícula</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Edite</th>
+                    <th scope="col">Ações</th>
 
                 </tr>
             </thead>
@@ -44,7 +44,7 @@ $collectors = selectAllCollectors();
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
                                 <a type="button" href="delete.php?collector=<?= $collector[0]?>"  class="btn btn-danger">Excluir</a>
-                                <a type="button" href="edit.php?collector=<?= $collector[0]?>" class="btn btn-warning">Editar</a>
+                                <a type="button" href="edicao.php?collector=<?= $collector[0]?>" class="btn btn-warning">Editar</a>
                             </div>
                         </td>
                     </tr>
