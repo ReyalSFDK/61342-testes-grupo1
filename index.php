@@ -6,6 +6,7 @@ setHeader("Todos os Colecionadores");
 
 $collectors = selectAllCollectors();
 ?>
+
 <body>
     <?php setNavBar() ?>
     <?php showAlerts() ?>
@@ -21,31 +22,37 @@ $collectors = selectAllCollectors();
         </div>
         <table class="table table-striped table-dark margin-nav">
             <thead class="thead-dark">
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Matrícula</th>
-                <th scope="col">Nome</th>
-                <th scope="col">Email</th>
-            </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Matrícula</th>
+                    <th scope="col">Nome</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Apagar</th>
+                    <th scope="col">Editar</th>
+
+
+                </tr>
             </thead>
             <tbody>
-            <?php
+                <?php
                 $count = 1;
                 foreach ($collectors as $collector) {
-                ?>
+                    ?>
                     <tr>
-                        <th scope="row"><?=$count++?></th>
-                        <td><?=$collector[0]?></td>
-                        <td><?=$collector[1]?></td>
-                        <td><?=$collector[4]?></td>
+                        <th scope="row"><?= $count++ ?></th>
+                        <td><?= $collector[0] ?></td>
+                        <td><?= $collector[1] ?></td>
+                        <td><?= $collector[4] ?></td>
+                        <td><button class="btn btn-danger">Apagar</button></td>
+                        <td><button class="btn btn-warning">Editar</button> </td>
                     </tr>
                 <?php
-                    }
-            ?>
+                }
+                ?>
             </tbody>
         </table>
-        <a href="delete.php?collector=<?=selectAllCollectors()[0][0]?>">Delete</a>
+        <a href="delete.php?collector=<?= selectAllCollectors()[0][0] ?>">Delete</a>
     </div>
 
-    <?=setJavaScripts()?>
+    <?= setJavaScripts() ?>
 </body>
