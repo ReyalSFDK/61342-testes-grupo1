@@ -27,7 +27,7 @@ $collectors = selectAllCollectors();
                     <th scope="col">Matrícula</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Edite</th>
+                    <th scope="col">Edit</th>
 
                 </tr>
             </thead>
