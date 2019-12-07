@@ -95,10 +95,16 @@ function setJavaScripts() {
 function selectAllCollectors() {
     global $conn;
 
-    $sql = "SELECT * FROM collectors ORDER BY registration";
+    $sql = "SELECT * FROM collectors";
     $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
 
-    return mysqli_fetch_array($result);
+    $collectors = mysqli_fetch_all($result);
+
+    if ($collectors) {
+        return $collectors;
+    } else {
+        return [];
+    }
 }
 
 /**
