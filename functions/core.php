@@ -169,24 +169,26 @@ function createCollector() {
         $cpf = $_POST['cpf'] ?? '';
 
         $birthDate = DateTime::createFromFormat('Y-m-d', $birthDay);
-        var_dump($birthDay, $birthDate);
-        if (validateCollector(
+        if ($birthDate && validateCollector(
             $fullName,
             $birthDate,
             $phone,
             $email,
             $cpf
         )) {
+            $formattedBirthDate = $birthDate->format('Y-m-d');
             $sql = "INSERT INTO 
                 collectors
                     (fullName, birthDay, phone, email, cpf)
                 VALUES
-                    ($fullName, $birthDate, $email, $email, $cpf)";
+                    ('$fullName', '$formattedBirthDate', '$phone', '$email', '$cpf')";
 
             $query = mysqli_query($conn, $sql);
             if ($query) {
                 setAlert(ALERT_SUCCESS, "O Colecionador foi adicionado com sucesso.");
                 header('Location: index.php');
+            } else {
+                var_dump(mysqli_error($conn));
             }
         }
     }
@@ -249,7 +251,8 @@ function validateLength(string $variable, string $label, int $min, int $max): bo
  * @throws Exception
  */
 function validateBirthDay(DateTime $birthDay): bool {
-    if (new DateTime("now") > $birthDay) {
+    $now = new DateTime();
+    if ($now <= $birthDay) {
         setAlert(ALERT_ERROR, "A data de nascimento não pode ser maior que a de hoje.");
         return false;
     }
