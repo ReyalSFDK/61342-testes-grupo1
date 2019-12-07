@@ -27,9 +27,7 @@ $collectors = selectAllCollectors();
                     <th scope="col">Matrícula</th>
                     <th scope="col">Nome</th>
                     <th scope="col">Email</th>
-                    <th scope="col">Apagar</th>
-                    <th scope="col">Editar</th>
-
+                    <th scope="col">Edite</th>
 
                 </tr>
             </thead>
@@ -43,15 +41,18 @@ $collectors = selectAllCollectors();
                         <td><?= $collector[0] ?></td>
                         <td><?= $collector[1] ?></td>
                         <td><?= $collector[4] ?></td>
-                        <td><button class="btn btn-danger">Apagar</button></td>
-                        <td><button class="btn btn-warning">Editar</button> </td>
+                        <td>
+                            <div class="btn-group" role="group" aria-label="Basic example">
+                                <a type="button" href="delete.php?collector=<?= $collector[0]?>"  class="btn btn-danger">Excluir</a>
+                                <a type="button" href="edit.php?collector=<?= $collector[0]?>" class="btn btn-warning">Editar</a>
+                            </div>
+                        </td>
                     </tr>
                 <?php
                 }
                 ?>
             </tbody>
         </table>
-        <a href="delete.php?collector=<?= selectAllCollectors()[0][0] ?>">Delete</a>
     </div>
 
     <?= setJavaScripts() ?>
