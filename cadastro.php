@@ -2,15 +2,20 @@
 // Pega as funções do projeto
 require_once("functions/core.php");
 
-setHeader("Todos os Colecionadores")
+setHeader("Novo Colecionador");
+createCollector();
+
+$_SESSION['token'] = time();
 ?>
 
 <body>
     <?php setNavBar() ?>
-    <?php showAlerts() ?>
 
     <div class="container margin-nav">
-        <form>
+
+        <?php showAlerts() ?>
+
+        <form method="POST">
             <div class="form-group">
                 <label>Nome Completo</label>
                 <input type="text" name="fullName" class="form-control" placeholder="Mestre da Pisadinha">
@@ -25,12 +30,13 @@ setHeader("Todos os Colecionadores")
             </div>
             <div class="form-group">
                 <label>Celular</label>
-                <input type="date" name="phone" class="form-control" placeholder="71982509571">
+                <input type="tel" name="phone" class="form-control" placeholder="71982509571">
             </div>
             <div class="form-group">
                 <label>CPF</label>
-                <input type="date" name="cpf" class="form-control" placeholder="0925852595">
+                <input type="tel" name="cpf" class="form-control" placeholder="0925852595">
             </div>
+            <input type="hidden" name="token" value="<?php echo $_SESSION['token']?>">
             <button type="submit" class=" btn btn-dark">Entrar</button>
         </form>
     </div>

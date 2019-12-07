@@ -161,14 +161,15 @@ function deleteCollector(string $collectorRegistration) {
 function createCollector() {
     global $conn;
 
-    if (!empty($_GET['token'])) {
-        $fullName = $_GET['fullName'] ?? '';
-        $birthDay = $_GET['birthDay'] ?? '';
-        $phone = $_GET['phone'] ?? '';
-        $email = $_GET['email'] ?? '';
-        $cpf = $_GET['cpf'] ?? '';
+    if (!empty($_POST['token'])) {
+        $fullName = $_POST['fullName'] ?? '';
+        $birthDay = $_POST['birthDay'] ?? '';
+        $phone = $_POST['phone'] ?? '';
+        $email = $_POST['email'] ?? '';
+        $cpf = $_POST['cpf'] ?? '';
 
-        $birthDate = new DateTime($birthDay);
+        $birthDate = DateTime::createFromFormat('Y-m-d', $birthDay);
+        var_dump($birthDay, $birthDate);
         if (validateCollector(
             $fullName,
             $birthDate,
@@ -207,7 +208,7 @@ function createCollector() {
 function validateCollector(string $fullName, DateTime $birthDay, string $phone, string $email, string $cpf) {
     return
         validateLength($fullName, "Nome Completo", 9, 40) &&
-        validateLength($phone, "Telefone", 10, 11) &&
+        validateLength($phone, "Telefone", 9, 12) &&
         validateLength($email, "Email", 8, 30) &&
         validateLength($cpf, "CPF", 10, 12) &&
         validateBirthDay($birthDay);
@@ -229,12 +230,12 @@ function validateLength(string $variable, string $label, int $min, int $max): bo
         return false;
     }
     if (strlen($variable) <= $min) {
-        setAlert(ALERT_ERROR, "O nome não pode ter menos que $min caracteres.");
+        setAlert(ALERT_ERROR, "O campo $label não pode ter menos que $min caracteres.");
         return false;
     }
 
     if (strlen($variable) >= $max) {
-        setAlert(ALERT_ERROR, "O nome não pode ter mais que $max caracteres.");
+        setAlert(ALERT_ERROR, "O campo $label não pode ter mais que $max caracteres.");
         return false;
     }
     return true;
