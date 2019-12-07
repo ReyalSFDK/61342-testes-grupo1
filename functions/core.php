@@ -126,3 +126,106 @@ function deleteCollector(string $collectorRegistration) {
 
     header('Location: index.php');
 }
+
+/**
+ * Adiciona um colecionador
+ *
+ * @throws Exception
+ */
+function createCollector() {
+    global $conn;
+
+    if (!empty($_GET['token'])) {
+        $fullName = $_GET['fullName'] ?? '';
+        $birthDay = $_GET['birthDay'] ?? '';
+        $phone = $_GET['phone'] ?? '';
+        $email = $_GET['email'] ?? '';
+        $cpf = $_GET['cpf'] ?? '';
+
+        $birthDate = new DateTime($birthDay);
+        if (validateCollector(
+            $fullName,
+            $birthDate,
+            $phone,
+            $email,
+            $cpf
+        )) {
+            $sql = "INSERT INTO 
+                collectors
+                    (fullName, birthDay, phone, email, cpf)
+                VALUES
+                    ($fullName, $birthDate, $email, $email, $cpf)";
+
+            $query = mysqli_query($conn, $sql);
+            if ($query) {
+                setAlert(ALERT_SUCCESS, "O Colecionador foi adicionado com sucesso.");
+                header('Location: index.php');
+            }
+        }
+    }
+}
+
+/**
+ * Valida os dados de um Colecionador
+ *
+ * @param string $fullName
+ * @param DateTime $birthDay
+ * @param string $phone
+ * @param string $email
+ * @param string $cpf
+ *
+ * @return bool
+ *
+ * @throws Exception
+ */
+function validateCollector(string $fullName, DateTime $birthDay, string $phone, string $email, string $cpf) {
+    return
+        validateLength($fullName, "Nome Completo", 9, 40) &&
+        validateLength($phone, "Telefone", 10, 11) &&
+        validateLength($email, "Email", 8, 30) &&
+        validateLength($cpf, "CPF", 10, 12) &&
+        validateBirthDay($birthDay);
+}
+
+/**
+ * Valida o tamanho de uma string
+ *
+ * @param string $variable
+ * @param string $label
+ * @param int $min
+ * @param int $max
+ *
+ * @return bool
+ */
+function validateLength(string $variable, string $label, int $min, int $max): bool {
+    if (empty($variable)) {
+        setAlert(ALERT_ERROR, "O campo $label não ser vazio.");
+        return false;
+    }
+    if (strlen($variable) <= $min) {
+        setAlert(ALERT_ERROR, "O nome não pode ter menos que $min caracteres.");
+        return false;
+    }
+
+    if (strlen($variable) >= $max) {
+        setAlert(ALERT_ERROR, "O nome não pode ter mais que $max caracteres.");
+        return false;
+    }
+    return true;
+}
+
+/**
+ * Valida a data de nascimento
+ *
+ * @param DateTime $birthDay
+ * @return bool
+ * @throws Exception
+ */
+function validateBirthDay(DateTime $birthDay): bool {
+    if (new DateTime("now") > $birthDay) {
+        setAlert(ALERT_ERROR, "A data de nascimento não pode ser maior que a de hoje.");
+        return false;
+    }
+
+    return true;
+}
