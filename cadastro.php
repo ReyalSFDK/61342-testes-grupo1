@@ -43,8 +43,8 @@ $cpf = $_POST['cpf'] ?? '';
             </div>
             <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ?>">
             <div class="row-8 d-flex justify-content-between">
-                <button type="submit" class=" btn btn-dark">Entrar</button>
-                <button type="submit" class="btn btn-dark">Voltar</button>
+                <a href="index.php"type="submit" class="btn btn-light">Voltar</a>
+                <button type="submit" class=" btn btn-dark">Cadastrar</button>
             </div>
         </form>
     </div>
