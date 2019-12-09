@@ -135,7 +135,7 @@ function selectCollector(string $registration) {
 function deleteCollector(string $collectorRegistration) {
     global $conn;
 
-    $sql = "DELETE FROM collectors WHERE registration=$collectorRegistration";
+    $sql = "DELETE FROM collectors WHERE registration = $collectorRegistration";
     $result = mysqli_query($conn, $sql);;
 
     if ($result) {
@@ -268,7 +268,7 @@ function validateCollector(string $fullName, DateTime $birthDay, string $phone, 
     return
         validateLength($fullName, "Nome Completo", 9, 40) &&
         validateLength($phone, "Telefone", 9, 12) &&
-        validateLength($email, "Email", 8, 30) &&
+        validateLength($email, "Email", 8, 50) &&
         validateLength($cpf, "CPF", 10, 12) &&
         validateBirthDay($birthDay);
 }
