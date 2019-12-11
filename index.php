@@ -18,11 +18,11 @@ $collectors = selectAllCollectors();
                 <h4 class="card-title">Trato Feito</h4>
             </div>
             <div class="col">
-                <a type="button" class="btn btn-dark" href="cadastro.php">Adicionar</a>
+                <a type="button" class="btn btn-primary" href="cadastro.php">Adicionar</a>
             </div>
         </div>
-        <table class="table table-striped table-dark margin-nav">
-            <thead class="thead-dark">
+        <table class="table table-striped tabtn-primary margin-nav">
+            <thead class="thbtn-primary">
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Matrícula</th>
