@@ -49,8 +49,8 @@ $collectors = selectAllCollectors();
                         <td><?= $collector[4] ?></td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
-                                <a type="button" href="delete.php?collector=<?= $collector[0] ?>" class="btn btn-danger">Excluir</a>
                                 <a type="button" href="edicao.php?collector=<?= $collector[0] ?>" class="btn btn-warning">Editar</a>
+                                <a type="button" href="delete.php?collector=<?= $collector[0] ?>" class="btn btn-danger">Excluir</a>
                             </div>
                         </td>
                     </tr>
