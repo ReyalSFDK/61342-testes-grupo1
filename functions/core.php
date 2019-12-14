@@ -107,6 +107,30 @@ function selectAllCollectors() {
     }
 }
 
+function searchCollectors(string $search) {
+    global $conn;
+
+    $sql = "
+        SELECT *
+        FROM collectors
+        WHERE
+            registration LIKE '%".$search."%' OR
+            fullName LIKE '%".$search."%' OR
+            email LIKE '%".$search."%' OR
+            cpf LIKE '%".$search."%' OR
+            phone LIKE '%".$search."%'
+    ";
+    $result = mysqli_query($conn, $sql) or die(mysqli_error($conn));
+
+    $collectors = mysqli_fetch_all($result);
+
+    if ($collectors) {
+        return $collectors;
+    } else {
+        return [];
+    }
+}
+
 /**
  * @param string $registration
  *
