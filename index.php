@@ -27,6 +27,7 @@ $collectors = selectAllCollectors();
                     <th scope="col">#</th>
                     <th scope="col">Matrícula</th>
                     <th scope="col">Nome</th>
+                    <th scope="col">Idade</th>
                     <th scope="col">Email</th>
                     <th scope="col">Ações</th>
 
@@ -36,11 +37,15 @@ $collectors = selectAllCollectors();
                 <?php
                 $count = 1;
                 foreach ($collectors as $collector) {
+                    $now = new DateTime("now");
+                    $birthDate = new DateTime($collector[2]);
+                    $years = $birthDate->diff($now);
                     ?>
                     <tr>
                         <th scope="row"><?= $count++ ?></th>
                         <td><?= $collector[0] ?></td>
                         <td><?= $collector[1] ?></td>
+                        <td><?= $years->format("%y anos") ?></td>
                         <td><?= $collector[4] ?></td>
                         <td>
                             <div class="btn-group" role="group" aria-label="Basic example">
